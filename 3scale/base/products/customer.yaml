@@ -36,5 +36,5 @@ spec:
       - value_type": "plain"
         op: "set"
         header": "Authorization"
-        value: "Basic dXNlcjpwYXNzd29yZA==
+        value: "Basic dXNlcjpwYXNzd29yZA=="
      
