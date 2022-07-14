@@ -4,8 +4,8 @@ The following tutorial provide steps on leveraging GitOps to configure 3scale us
 3scale CRs (Product, Backend CRs)
 
 ## Prerequisites
-- 3scale operator being installed either should be cluster wide operator or if namespace specific then the operator should be installed in the namespace where the 3scale CRs are to be applied using GitOps
-- Install 3scale using APIManager CR
+- 3scale operator being installed (from operatorhub) either should be cluster wide operator(introduced in 3scale 2.12) or if it is namespace specific then the operator should be installed in the namespace where the 3scale CRs are to be applied using GitOps
+- Install 3scale using APIManager CR (CR is not included). Please follow [Provision OpenShift Data Foundation](https://github.com/3scale-demos/ossm-3scale-wasm#provision-openshift-data-foundation) and [Provision 3scale](https://github.com/3scale-demos/ossm-3scale-wasm#provision-3scale) to install 3scale
 
 ## Install RH OpenShift GitOps
 Install Red Hat OpenShift GitOps operator from OperatorHub from the OCP webconsole
@@ -26,8 +26,15 @@ OpenShift as oauth provider by clicking the button `LOG IN VIA OPENSHIFT`.
 
 Find the password for the admin in `openshift-gitops-cluster` secret in `openshift-gitops` namespace.
 
+## Create 3scale namespace and secret
+Create a namespace say `3scale-dev` where GitOps will apply CRs and create the secret required for 3scale CRs to authenticate with 3scale
+
+```
+oc new-project 3scale-dev
+```
+
 ## Enabling RBAC
-Create cluster role to create, update, delete 3scale CRs (Need to have admin access to OCP for this)
+Create cluster role to create, update, delete 3scale CRs (Need to have OCP admin access for this)
 
 ```
 oc apply -f rbac/ClusterRole_gitops-threescale-access.yaml
@@ -35,11 +42,12 @@ oc apply -f rbac/ClusterRole_gitops-threescale-access.yaml
 Assign the cluster role to sa `openshift-gitops-argocd-application-controller`
 
 ```
-oc adm policy add-role-to-user gitops-threescale-access system:serviceaccount:openshift-gitops:openshift-gitops-argocd-application-controller -n <namespace where 3scale CRs to be applied>
+oc adm policy add-role-to-user gitops-threescale-access system:serviceaccount:openshift-gitops:openshift-gitops-argocd-application-controller -n 3scale-dev (namespace where 3scale CRs to be applied)
 ```
 
 ## Create ArgoCD Application
-Create the ArgoCD Application
+ 
+Create the ArgoCD Application. Namespace where 3scale CRs are to be created is assumed as `3scale-dev`. Please change the `namespace` attribute under `spec->destination` in the `gitops/Application_threescale-dev.yaml` to align with your environment
 
 ```
 oc apply -f gitops/Application_threescale-dev.yaml -n openshift-gitops
@@ -58,7 +66,7 @@ Click `Manager your repositories, projects, settings` icon on the left panel of 
 **Please note that the directory structure used for 3scale CRs are for the tutorial purpose only. Please adjust based on the needs**
 
 3scale CRs required for this tutorial are spread under multiple directories and uses kustomize plugin 
-to replace/merge the environment specific values
+to replace and merge the environment specific values
 
 - `base` - 3scale manifest attributes that are common for all environments are housed here (spread under different directories i.e. `products`, `backends` etc.)
 
