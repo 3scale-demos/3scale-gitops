@@ -1,25 +1,25 @@
 # 3scale Configuration - GitOps Tutorial
 
 The following tutorial provide steps on leveraging GitOps to configure 3scale using 
-3scale CRs (Product, Backend CRs)
+3scale CRs (Product, Backend CRs etc.)
 
 ## Prerequisites
 - 3scale operator being installed (from operatorhub) either should be cluster wide operator(introduced in 3scale 2.12) or if it is namespace specific then the operator should be installed in the namespace where the 3scale CRs are to be applied using GitOps
 - Install 3scale using APIManager CR (CR is not included). Please follow [Provision OpenShift Data Foundation](https://github.com/3scale-demos/ossm-3scale-wasm#provision-openshift-data-foundation) and [Provision 3scale](https://github.com/3scale-demos/ossm-3scale-wasm#provision-3scale) to install 3scale
 
 ## Install RH OpenShift GitOps
-Install Red Hat OpenShift GitOps operator from OperatorHub from the OCP webconsole
+Install Red Hat OpenShift GitOps operator from the OperatorHub in the OCP webconsole
 
 ![](images/gitops-operator.png)
 
 This will automatically create 
 - `openshift-gitops` namespace 
-- `ArgoCD` CR with the name `openshift-gitops` is created in openshift-gitops namespace.
+- `ArgoCD` CR with the name `openshift-gitops` in openshift-gitops namespace.
  `ArgoCD` CR creates a bunch of deployments. These deployments together make ArgoCD application
-- `AppProject` CR with the name `default` is created in openshift-gitops namespace.
+- `AppProject` CR with the name `default` in openshift-gitops namespace.
 
 ## Login to OpenShift GitOps
-Go to the login page using the route URL it creates as `openshift-gitops-server`.
+Go to the login page using the route URL it creates as `openshift-gitops-server` in `openshift-gitops` namespace.
 
 You can login to `OpenShift GitOps` using the `admin` user that comes with ArgoCD deployment OR using
 OpenShift as oauth provider by clicking the button `LOG IN VIA OPENSHIFT`.
@@ -58,8 +58,8 @@ oc apply -f gitops/Application_threescale-dev.yaml -n openshift-gitops
 
 Configure the repositories to be connected by the ArgoCD application 
 
-Click `Manager your repositories, projects, settings` icon on the left panel of the ArgoCD console, Click 
-`Repositories` and Click either `Connect repo using SSH` OR `Connect repo using HTTPS` and fill in the form as shown below
+Click `Manage your repositories, projects, settings` icon on the left panel of the ArgoCD console, Click 
+`Repositories` and Click either `Connect repo using SSH` OR `Connect repo using HTTPS` and fill in the form as shown below and click `CONNECT`. Make sure it is SUCCESSFUL.
 
 ![](images/gitops-connectrepo.png)
 
