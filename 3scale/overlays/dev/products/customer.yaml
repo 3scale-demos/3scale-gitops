@@ -3,6 +3,8 @@ kind: Product
 metadata:
   name: customer
 spec:
+  providerAccountRef:
+    name: 3scale-admin-dev-secret
   deployment:
     apicastSelfManaged:
       stagingPublicBaseURL: "https://apis-3scale-dev-staging.apps.cluster-2q76v.2q76v.sandbox955.opentlc.com:443"
