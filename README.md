@@ -31,6 +31,7 @@ Create a namespace say `3scale-dev` where GitOps will apply CRs and create the s
 
 ```
 oc new-project 3scale-dev
+oc create secret generic 3scale-admin-dev-secret --from-literal=adminURL=https://3scale-admin.apps.cluster-2q76v.2q76v.sandbox955.opentlc.com --from-literal=token=<3scale admin access token>
 ```
 
 ## Enabling RBAC
