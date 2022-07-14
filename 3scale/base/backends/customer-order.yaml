@@ -1,0 +1,20 @@
+apiVersion: capabilities.3scale.net/v1beta1
+kind: Backend
+metadata:
+  name: customer-order
+spec:
+  name: "customer-order"
+  systemName: "customer-order"
+  mappingRules:
+  - httpMethod: POST
+    pattern: "/customers/{id}/orders/{orderid}"
+    increment: 1
+    metricMethodRef: hits            
+  - httpMethod: GET
+    pattern: "/customers/{id}/orders/{orderid}"
+    increment: 1
+    metricMethodRef: hits            
+  - httpMethod: PUT
+    pattern: "/customers/{id}/orders/{orderid}"
+    increment: 1
+    metricMethodRef: hits            

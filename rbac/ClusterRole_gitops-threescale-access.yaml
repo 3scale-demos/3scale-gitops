@@ -1,0 +1,13 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+ name: gitops-threescale-access
+ labels:
+   app.kubernetes.io/part-of: openshift-gitops
+rules:
+- apiGroups: [""]
+  resources: ["pods", "pods/log"]
+  verbs: ["get","list", "watch"]
+- apiGroups: ["capabilities.3scale.net"]
+  resources: ["activedocs", "backends", "custompolicydefinitions","developeraccounts", "developerusers", "openapis", "products"]
+  verbs: ["get", "list", "create", "update", "delete", "patch", "watch"]

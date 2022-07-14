@@ -1,0 +1,40 @@
+apiVersion: capabilities.3scale.net/v1beta1
+kind: Product
+metadata:
+  name: customer
+spec:
+  name: "customer"
+  deployment:
+    apicastSelfManaged:
+      stagingPublicBaseURL: "https://apis-3scale-base-staging.apps.cluster-2q76v.2q76v.sandbox955.opentlc.com:443"
+      productionPublicBaseURL: "https://apis-3scale-base.apps.cluster-2q76v.2q76v.sandbox955.opentlc.com:443"
+      authentication:
+        oidc:
+          issuerType: "keycloak"
+          authenticationFlow:
+            standardFlowEnabled: false
+            implicitFlowEnabled: false
+            serviceAccountsEnabled: true
+            directAccessGrantsEnabled: false
+          jwtClaimWithClientID: "azp"
+          jwtClaimWithClientIDType: "plain"          
+  applicationPlans:
+    portal:
+      name: "customer"
+      published: true
+      appsRequireApproval: true
+  policies:
+  - name: apicast
+    version: builtin   
+    enabled: true
+    configuration: {}
+  - name: headers
+    version: builtin   
+    enabled: true
+    configuration:
+      request:
+      - value_type": "plain"
+        op: "set"
+        header": "Authorization"
+        value: "Basic dXNlcjpwYXNzd29yZA==
+     

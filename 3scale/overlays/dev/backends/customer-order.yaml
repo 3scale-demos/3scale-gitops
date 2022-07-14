@@ -1,0 +1,8 @@
+apiVersion: capabilities.3scale.net/v1beta1
+kind: Backend
+metadata:
+  name: customer-order
+spec:
+  name: "customer-order"
+  systemName: "customer-order"
+  privateBaseURL: "http://customer-order.dev.svc.cluster.local:808080
