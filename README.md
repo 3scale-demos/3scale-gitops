@@ -81,5 +81,11 @@ GitOps application `threescale-dev` is configured to synch manually. But, it can
 Click `Manage Application` icon on the left panel of the ArgoCD console. You will then see `threescale-dev` application as shown below
 ![](images/gitops-application.png)
 
-Click `SYNC` and `SYNCHRONIZE` as shown below
+Click `SYNC` and `SYNCHRONIZE` as shown below to synch the 3scale CRs 
 ![](images/gitops-synch.png)
+
+Once synched then the application should look as below
+![](images/gitops-synched.png)
+
+Go to 3scale Admin console and observe that the product `customer` and backend `customer-order` are configured as shows below
+![](images/3scale-synch.png)
