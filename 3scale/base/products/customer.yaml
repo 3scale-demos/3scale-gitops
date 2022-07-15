@@ -37,4 +37,3 @@ spec:
         op: "set"
         header": "Authorization"
         value: "Basic dXNlcjpwYXNzd29yZA=="
-     

@@ -13,5 +13,5 @@ spec:
         oidc:
           issuerEndpoint: "https://zync-sso:b361ca5f-1646-4377-90dc-3f77dca10f40@sso-dev.apps.cluster-2q76v.2q76v.sandbox955.opentlc.com/auth/realms/dev"
   backendUsages:
-    gav:
+    customer-order:
       path: /customer/order

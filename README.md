@@ -53,6 +53,7 @@ Create the ArgoCD Application. Namespace where 3scale CRs are to be created is a
 ```
 oc apply -f gitops/Application_threescale-dev.yaml -n openshift-gitops
 ```
+An ArgoCD application `threescale-dev` is created.
 
 ## Connect the git repository
 
@@ -72,3 +73,13 @@ to replace and merge the environment specific values
 - `base` - 3scale manifest attributes that are common for all environments are housed here (spread under different directories i.e. `products`, `backends` etc.)
 
 - `overlays/dev` - 3scale manifest attributes that are specific for dev environment and different from base are housed here (spread under different directories i.e. `products`, `backends` etc.)
+
+## Manual Synch of 3scale CRs
+
+GitOps application `threescale-dev` is configured to synch manually. But, it can be changed to synch automatically i.e. changes committed to git repo are automatically applied to 3scale else go to the GitOps console using the route URL it creates as `openshift-gitops-server` in `openshift-gitops` namespace.
+
+Click `Manage Application` icon on the left panel of the ArgoCD console. You will then see `threescale-dev` application as shown below
+![](images/gitops-application.png)
+
+Click `SYNC` and `SYNCHRONIZE` as shown below
+![](images/gitops-synch.png)
