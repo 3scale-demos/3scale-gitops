@@ -46,15 +46,6 @@ Assign the cluster role to sa `openshift-gitops-argocd-application-controller`
 oc adm policy add-role-to-user gitops-threescale-access system:serviceaccount:openshift-gitops:openshift-gitops-argocd-application-controller -n 3scale-dev (namespace where 3scale CRs to be applied)
 ```
 
-## Create ArgoCD Application
- 
-Create the ArgoCD Application. Namespace where 3scale CRs are to be created is assumed as `3scale-dev`. Please change the `namespace` attribute under `spec->destination` in the `gitops/Application_threescale-dev.yaml` to align with your environment
-
-```
-oc apply -f gitops/Application_threescale-dev.yaml -n openshift-gitops
-```
-An ArgoCD application `threescale-dev` is created.
-
 ## Connect the git repository
 
 Configure the repositories to be connected by the ArgoCD application 
@@ -63,6 +54,15 @@ Click `Manage your repositories, projects, settings` icon on the left panel of t
 `Repositories` and Click either `Connect repo using SSH` OR `Connect repo using HTTPS` and fill in the form as shown below and click `CONNECT`. Make sure it is SUCCESSFUL.
 
 ![](images/gitops-connectrepo.png)
+
+## Create ArgoCD Application
+ 
+Create the ArgoCD Application. Namespace where 3scale CRs are to be created is assumed as `3scale-dev`. Please change the `namespace` attribute under `spec->destination` in the `gitops/Application_threescale-dev.yaml` to align with your environment
+
+```
+oc apply -f gitops/Application_threescale-dev.yaml -n openshift-gitops
+```
+An ArgoCD application `threescale-dev` is created.
 
 ## 3scale CRs
 **Please note that the directory structure used for 3scale CRs are for the tutorial purpose only. Please adjust based on the needs**
